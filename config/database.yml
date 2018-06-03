@@ -2,15 +2,15 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: rekall_dev
   username: rekall
   password: password
   host: localhost
   port: 5432
   min_messages: notice
+
+development:
+  <<: *default
+  database: rekall_dev
 
 test:
   <<: *default
@@ -38,5 +38,4 @@ test:
 production:
   <<: *default
   database: rekall_production
-  username: rekall
   password: <%= ENV['REKALL_DATABASE_PASSWORD'] %>

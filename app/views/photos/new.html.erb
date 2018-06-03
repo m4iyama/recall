@@ -1,0 +1,50 @@
+<h2>Post new photo</h2>
+
+<%= form_for @photo, html: { class: 'ui form' } do |f| %>
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %>
+    <div id="map"></div>
+  </div>
+
+  <%= f.submit 'Submit', class: 'ui orange button' %>
+<% end %>
+
+<script type="text/javascript">
+    let mapNew;
+    if (!mapNew) {
+       mapNew = new GMaps({
+            div: '#map',
+            lat: 35.6896,
+            lng: 139.6921,
+        });
+    }
+
+    navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        mapNew.setCenter(latitude, longitude);
+    }, error => {
+
+    });
+
+    GMaps.on('click', mapNew.map, function(e) {
+        mapNew.removeMarkers();
+
+        const lat = e.latLng.lat();
+        const lng = e.latLng.lng();
+
+        mapNew.addMarker({
+            lat,
+            lng,
+        });
+
+        document.getElementById('photo_latitude').value = lat;
+        document.getElementById('photo_longitude').value = lng;
+    });
+</script>
