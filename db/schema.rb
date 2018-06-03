@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_05_31_232151) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "photos", force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false

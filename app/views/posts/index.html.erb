@@ -1,10 +1,10 @@
 <div id="map"></div>
 
 <div class="ui doubling four link cards">
-  <% @photos.each do |photo| %>
+  <% @posts.each do |post| %>
     <div class="card">
       <div class="image">
-        <%= image_tag photo.image %>
+        <%= image_tag post.photo %>
       </div>
       <div class="content">
         <div class="description">
@@ -41,7 +41,7 @@
             lat: marker.lat,
             lng: marker.lng,
             infoWindow: {
-                content: `<img src=${marker.image_url} height='100' />`
+                content: `<img src=${marker.photo_url} height='100' />`
             },
             mouseover: function (e) {
                 this.infoWindow.open(map, this);
@@ -50,7 +50,7 @@
                 this.infoWindow.close();
             },
             click: function (e) {
-                window.location.href = `/photos/${marker.photo_id}`
+                window.location.href = `/posts/${marker.post_id}`
             }
         })
     });

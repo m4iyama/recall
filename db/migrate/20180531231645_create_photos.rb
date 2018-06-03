@@ -1,6 +1,6 @@
 class CreatePhotos < ActiveRecord::Migration[5.2]
   def change
-    create_table :photos do |t|
+    create_table :posts do |t|
       t.float :latitude
       t.float :longitude
 

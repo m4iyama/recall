@@ -5,18 +5,18 @@ centers = [{
                latitude: 35.6896,
                longitude: 139.6921,
            }, {
-    latitude: 35.6479,
-    longitude: 139.7892,
+               latitude: 35.6479,
+               longitude: 139.7892,
            }]
 
 30.times do
   center = centers.sample
-  photo = Photo.create(
+  post = Post.create(
       latitude: center[:latitude] + (Random.rand(0.01) - 0.005),
       longitude: center[:longitude] + (Random.rand(0.01) - 0.005),
   )
   filename = "test#{Random.rand(1..3)}.jpg"
-  photo.image.attach(
+  post.photo.attach(
       io: File.open(Rails.root.join('app', 'assets', 'images', filename)),
       filename: filename,
       content_type: 'image/jpeg'

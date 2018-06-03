@@ -1,6 +1,6 @@
-<h2>Post new photo</h2>
+<h2>New Post</h2>
 
-<%= form_for @photo, html: { class: 'ui form' } do |f| %>
+<%= form_for @post, html: { class: 'ui form' } do |f| %>
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
   <div class="field">
@@ -17,9 +17,9 @@
 <% end %>
 
 <script type="text/javascript">
-    let mapNew;
-    if (!mapNew) {
-       mapNew = new GMaps({
+    let map;
+    if (!map) {
+       map = new GMaps({
             div: '#map',
             lat: 35.6896,
             lng: 139.6921,
@@ -28,23 +28,23 @@
 
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        mapNew.setCenter(latitude, longitude);
+        map.setCenter(latitude, longitude);
     }, error => {
 
     });
 
-    GMaps.on('click', mapNew.map, function(e) {
-        mapNew.removeMarkers();
+    GMaps.on('click', map.map, function(e) {
+        map.removeMarkers();
 
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
 
-        mapNew.addMarker({
+        map.addMarker({
             lat,
             lng,
         });
 
-        document.getElementById('photo_latitude').value = lat;
-        document.getElementById('photo_longitude').value = lng;
+        document.getElementById('post_latitude').value = lat;
+        document.getElementById('post_longitude').value = lng;
     });
 </script>
