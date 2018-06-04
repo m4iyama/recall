@@ -1,11 +1,11 @@
 <h2>New Post</h2>
 
-<%= form_for @post, html: { class: 'ui form' } do |f| %>
+<%= form_for @post, url: user_posts_path(current_user), html: { class: 'ui form' } do |f| %>
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
   <div class="field">
-    <%= f.label :image %>
-    <%= f.file_field :image %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
   </div>
 
   <div class="field">

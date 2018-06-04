@@ -1,3 +1,4 @@
+usernames = (4..6).map {|n| "m#{n}iyama"}
 centers = [{
                latitude: 35.6219,
                longitude: 139.6891,
@@ -9,16 +10,29 @@ centers = [{
                longitude: 139.7892,
            }]
 
-30.times do
-  center = centers.sample
-  post = Post.create(
-      latitude: center[:latitude] + (Random.rand(0.01) - 0.005),
-      longitude: center[:longitude] + (Random.rand(0.01) - 0.005),
+usernames.each do |username|
+  user = User.new(
+      email: "#{username}@email.com",
+      username: username,
+      password: 'password',
+      password_confirmation: 'password',
   )
-  filename = "test#{Random.rand(1..3)}.jpg"
-  post.photo.attach(
-      io: File.open(Rails.root.join('app', 'assets', 'images', filename)),
-      filename: filename,
-      content_type: 'image/jpeg'
-  )
+  user.skip_confirmation!
+  user.save!
+
+  10.times do
+    center = centers.sample
+    post = user.posts.create(
+        latitude: center[:latitude] + (Random.rand(0.01) - 0.005),
+        longitude: center[:longitude] + (Random.rand(0.01) - 0.005),
+    )
+    filename = "test#{Random.rand(1..3)}.jpg"
+    post.photo.attach(
+        io: File.open(Rails.root.join('app', 'assets', 'images', filename)),
+        filename: filename,
+        content_type: 'image/jpeg'
+    )
+  end
 end
+
+

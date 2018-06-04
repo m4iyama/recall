@@ -6,7 +6,8 @@ class PostsController < ApplicationController
           post_id: post.id,
           lat: post.latitude,
           lng: post.longitude,
-          photo_url: url_for(post.photo)
+          photo_url: url_for(post.photo),
+          post_url: user_post_path(user_username: post.user.username, id: post.id)
       }
     end
   end
@@ -20,14 +21,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    Post.create!(post_params)
+    current_user.posts.create!(post_params)
+    puts post_params
 
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:latitude, :longitude, :image)
+      params.require(:post).permit(:latitude, :longitude, :photo)
     end
 end
