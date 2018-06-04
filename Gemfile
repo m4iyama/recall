@@ -10,7 +10,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'js-routes'
+gem 'devise'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -18,7 +18,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'mini_magick', '~> 4.8'
 # gem 'capistrano-rails', group: :development
+#
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
