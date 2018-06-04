@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).with_attached_photo
     @markers = @posts.map do |post|
       {
           post_id: post.id,
