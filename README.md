@@ -1,6 +1,5 @@
 # todo
 
-- photoにバリデーション追加 https://github.com/musaffa/file_validators
 - ユーザー設定ページ
     - avatar
     - color of marker
@@ -10,4 +9,5 @@
     - map
     - list of photos
     - following button
+- vuejsを適用
 
