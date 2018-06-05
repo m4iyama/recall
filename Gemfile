@@ -16,8 +16,8 @@ gem 'file_validators'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'mini_magick', '~> 4.8'
 # gem 'bcrypt', '~> 3.1.7'
-# gem 'mini_magick', '~> 4.8'
 # gem 'capistrano-rails', group: :development
 #
 gem 'bootsnap', '>= 1.1.0', require: false
