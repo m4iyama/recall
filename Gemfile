@@ -11,6 +11,7 @@ gem 'semantic-ui-sass'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'devise'
+gem 'file_validators'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'

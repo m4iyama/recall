@@ -9,4 +9,5 @@
     - post count
     - map
     - list of photos
+    - following button
 

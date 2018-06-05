@@ -21,10 +21,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    current_user.posts.create!(post_params)
-    puts post_params
+    @post = current_user.posts.build(post_params)
 
-    redirect_to root_path
+    if @post.save
+      redirect_to root_path
+    else
+      puts "ERROR"
+      puts @post.errors.full_messages
+      render 'new'
+    end
   end
 
   private
