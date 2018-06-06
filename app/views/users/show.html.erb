@@ -1,1 +1,30 @@
-<%= @user.username %>
+<h2><%= @user.username %></h2>
+<%= image_tag @user.avatar.variant(resize: '60x60'), style: 'border-radius: 50%;' %>
+
+<div id="map"></div>
+
+<div class="ui doubling four link cards">
+  <% @posts.each do |post| %>
+    <div class="card">
+      <div class="image">
+        <%= image_tag post.photo %>
+      </div>
+      <div class="content">
+        <div class="description">
+          hahaha test
+        </div>
+      </div>
+      <div class="extra content">
+        extra
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    let map = makeMap();
+    setMapCenter(map);
+
+    let markers = <%= @markers.to_json.to_s.html_safe %>;
+    locateMarkers(markers, map);
+</script>

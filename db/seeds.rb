@@ -17,12 +17,13 @@ usernames.each do |username|
       password: 'password',
       password_confirmation: 'password',
   )
+  user.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default_avatar.png')), filename: 'default_avatar.jpg', content_type: 'image/png')
   user.skip_confirmation!
   user.save!
 
   10.times do
     center = centers.sample
-    post = user.posts.create(
+    post = user.posts.build(
         latitude: center[:latitude] + (Random.rand(0.01) - 0.005),
         longitude: center[:longitude] + (Random.rand(0.01) - 0.005),
     )
@@ -32,6 +33,7 @@ usernames.each do |username|
         filename: filename,
         content_type: 'image/jpeg'
     )
+    post.save!
   end
 end
 

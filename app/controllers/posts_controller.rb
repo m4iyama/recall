@@ -1,15 +1,9 @@
 class PostsController < ApplicationController
+  include PostsHelper
+
   def index
     @posts = Post.includes(:user).with_attached_photo
-    @markers = @posts.map do |post|
-      {
-          post_id: post.id,
-          lat: post.latitude,
-          lng: post.longitude,
-          photo_url: url_for(post.photo),
-          post_url: user_post_path(user_username: post.user.username, id: post.id)
-      }
-    end
+    @markers = @posts.map {|post| to_marker(post)}
   end
 
   def show
