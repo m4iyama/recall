@@ -4,8 +4,14 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :avatar %>
+    <%= image_tag @user.avatar.variant(resize: '60x60'), style: 'border-radius: 50%;' %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

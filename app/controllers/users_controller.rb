@@ -10,4 +10,8 @@ class UsersController < ApplicationController
     @posts = @user.posts
     @markers = @posts.map {|post| to_marker(post)}
   end
+
+  def edit
+    @user = User.find_by(username: params[:username])
+  end
 end

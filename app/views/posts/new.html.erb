@@ -17,21 +17,8 @@
 <% end %>
 
 <script type="text/javascript">
-    let map;
-    if (!map) {
-       map = new GMaps({
-            div: '#map',
-            lat: 35.6896,
-            lng: 139.6921,
-        });
-    }
-
-    navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        map.setCenter(latitude, longitude);
-    }, error => {
-
-    });
+    let map = makeMap();
+    setMapCenter(map);
 
     GMaps.on('click', map.map, function(e) {
         map.removeMarkers();
