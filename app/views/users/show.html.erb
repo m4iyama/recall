@@ -1,5 +1,20 @@
 <h2><%= @user.username %></h2>
 <%= image_tag @user.avatar.variant(resize: '60x60'), style: 'border-radius: 50%;' %>
+<p><%= @user.posts.count %> posts</p>
+<p><%= @user.followers.count %> followers</p>
+<p><%= @user.followees.count %> followees</p>
+
+<div id="follow-button">
+  <button
+    v-if="isShowing"
+    class="ui button"
+    v-bind:class="color()"
+    v-on="{ click: isFollowing ? handleUnfollow : handleFollow }"
+    v-bind:disabled="isFetching"
+  >
+    {{ message() }}
+  </button>
+</div>
 
 <div id="map"></div>
 
@@ -27,4 +42,54 @@
 
     let markers = <%= @markers.to_json.to_s.html_safe %>;
     locateMarkers(markers, map);
+
+    var followButton = new Vue({
+        el: '#follow-button',
+        data: {
+            isShowing: <%= user_signed_in? && current_user != @user %>,
+            isFollowing: <%= !@relationship_id.nil? %>,
+            currentUserId: <%= user_signed_in? ? current_user.id : -1 %>,
+            userId: <%= @user.id %>,
+            relationshipId: <%= @relationship_id.nil? ? -1 : @relationship_id %>,
+            isFetching: false,
+        },
+        methods: {
+            message: function() {
+                return this.isFollowing ? 'Unfollow' : 'Follow';
+            },
+            color: function() {
+                return this.isFollowing ? 'red' : 'teal';
+            },
+            handleFollow: function() {
+                followButton.isFetching = true;
+                fetch('/relationships', {
+                    method: 'post',
+                    body: JSON.stringify({
+                        follower_id: this.currentUserId,
+                        followee_id: this.userId,
+                    }),
+                    headers: { 'Content-Type': 'application/json', },
+                    credentials: 'same-origin'
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    followButton.isFetching = false;
+                    followButton.isFollowing = true;
+                    followButton.relationshipId = data.relationship_id;
+                });
+            },
+            handleUnfollow: function() {
+                followButton.isFetching = true;
+                fetch(`/relationships/${this.relationshipId}`, {
+                    method: 'delete',
+                    credentials: 'same-origin'
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    followButton.isFetching = false;
+                    followButton.isFollowing = false;
+                });
+            }
+        }
+    });
 </script>

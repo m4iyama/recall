@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def unfollow(other)
     active_relationships.find_by(followee_id: other.id).destroy
   end
+
+  def following?(other)
+    folowees.include?(other)
+  end
 end
