@@ -8,4 +8,8 @@ module PostsHelper
         post_url: user_post_path(user_username: post.user.username, id: post.id)
     }
   end
+
+  def menu_item_class(path)
+    request.path == path ? 'active item' : 'item'
+  end
 end
