@@ -1,10 +1,17 @@
 # todo
 
-- ユーザートップページ
-    - username
-    - post count
-    - map
-    - list of photos
-    - following button
-    
+- postsをajaxで地図移動ごとに取るようにする
+- postsのview数を取る（after actionを利用）  
+- postsにlikeできるようにする
+- カードに日付を追加
+- likesタブを追加
+- deviseの日本語化
+
+- マーカーをクリックしたら遷移でなくポップアップを保持するようにする
+- マーカーにユーザ名を表示
+- カードにマーカーを表示してクリックするとクローズアップ
+- 地図をマーカーがある全域に表示する（そしてajaxで常に20件表示するなどして調整）
+
+- フォロー/フォロワー一覧ページ
+
 - marker colorを設定できるように
